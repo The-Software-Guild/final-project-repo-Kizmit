@@ -6,11 +6,17 @@
 
 package com.jdm.pokeAPI.controllers;
 
-import com.jdm.pokeAPI.entities.Pokemon;
+
+
+
+import com.jdm.pokeAPI.entities.pokemon.Pokemon;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.client.RestTemplate;
 
 /**
@@ -25,8 +31,15 @@ public class PokemonController {
     private RestTemplate restTemplate;
     
     @GetMapping("searchPokemon")
-    public String findPokemon(Model model){
-        Pokemon pokemon = restTemplate.getForObject("https://pokeapi.co/api/v2/pokemon/ditto", Pokemon.class);
+    public String findPokemon(){
+        return "searchPokemon";
+    }
+    
+    @PostMapping("searchPokemon")
+    public String showPokeInfo(Model model,
+                               @ModelAttribute("pokemonName") String name){
+        Pokemon pokemon = restTemplate.getForObject("https://pokeapi.co/api/v2/pokemon/" + name.toLowerCase(), Pokemon.class);
+        model.addAttribute("pokemon", pokemon);
         return "searchPokemon";
     }
 }
