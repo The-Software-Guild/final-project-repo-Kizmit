@@ -9,10 +9,12 @@ package com.jdm.pokeAPI.controllers;
 
 
 
+import com.jdm.pokeAPI.entities.pokemon.PokemonAbility;
 import com.jdm.pokeAPI.service.PokemonInfoService;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -46,10 +48,19 @@ public class PokemonController {
     }
     
     @GetMapping("pokeInfo")
-    public String showPokeInfo(@ModelAttribute("pokeSpriteFront") String spriteFront,
-                               @ModelAttribute("pokeSpriteBack") String spriteBack,
-                               @ModelAttribute("pokeName") String pokeName,
-                               @ModelAttribute("pokeSpecies") String pokeSpecies){
+    public String showPokeInfo(@ModelAttribute("pokeSpriteFrontMale") String spriteFrontMale,
+                               @ModelAttribute("pokeSpriteBackMale") String spriteBackMale,
+                               @ModelAttribute("pokeTypes") List<String> pokeTypes,
+                               @ModelAttribute("pokeSpecies") String pokeSpecies,
+                               @ModelAttribute("pokeSpriteBackFemale") String spriteBackFemale,
+                               @ModelAttribute("pokeSpriteFrontFemale") String spriteFrontFemale,
+                               @ModelAttribute("pokeGenderRatio") String genderRatio,
+                               @ModelAttribute("pokeAbilities") List<String> abilities,
+                               @ModelAttribute("pokeHabitat") String habitat,
+                               @ModelAttribute("pokeGenus") String genus,
+                               @ModelAttribute("pokeWeight") String weight,
+                               @ModelAttribute("pokeHeight") String height){
+        
         return "pokeInfo";
     }
 }
