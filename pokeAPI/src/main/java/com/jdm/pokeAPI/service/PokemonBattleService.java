@@ -95,6 +95,9 @@ public class PokemonBattleService {
         if(team1StatSum > team2StatSum){
             winner = team1.getName() + " wins!";
         }
+        else if(team1StatSum.equals(team2StatSum)){
+            winner = "It's a draw!";
+        }
         else{
             winner = team2.getName() + " wins!";
         }
