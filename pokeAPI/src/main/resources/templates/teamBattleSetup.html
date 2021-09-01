@@ -27,9 +27,6 @@
                         <h4>Team 1</h4>
                         <div class="form-group">
                             <select  class="form-control" required="required" name="team1" id="team1">
-                                <option disabled="disabled" selected="selected" >  
-                                  Pick a Team
-                                </option>
                                 <option th:each="team : ${teams}" th:value="${team.id}" th:text="${team.name}" >
                                 </option>
                             </select>
@@ -39,9 +36,6 @@
                         <h4>Team 2</h4>
                         <div class="form-group">
                             <select  class="form-control" required="required" name="team2" id="team2">
-                                <option disabled="disabled" selected="selected" >  
-                                  Pick a Team
-                                </option>
                                 <option th:each="team : ${teams}" th:value="${team.id}" th:text="${team.name}">
                                 </option>
                             </select>
