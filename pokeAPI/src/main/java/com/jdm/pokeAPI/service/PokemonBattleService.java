@@ -8,8 +8,6 @@ package com.jdm.pokeAPI.service;
 
 import com.jdm.pokeAPI.dao.PokemonTeamDao;
 import com.jdm.pokeAPI.entities.pokemon.Pokemon;
-import com.jdm.pokeAPI.entities.pokemon.PokemonSpecies;
-import com.jdm.pokeAPI.entities.pokemon.PokemonStat;
 import com.jdm.pokeAPI.entities.team.Team;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,10 +30,8 @@ public class PokemonBattleService {
     @Autowired
     RestTemplate restTemplate;
     
-    public void setupBattleInfo(int team1Id, int team2Id, RedirectAttributes redirectAttributes) {
-        Team team1 = pokeTeamDao.getTeamById(team1Id);
-        Team team2 = pokeTeamDao.getTeamById(team2Id);
-        
+    public void setupBattleInfo(Team team1, Team team2, RedirectAttributes redirectAttributes) {
+
         redirectAttributes.addAttribute("team1Name", team1.getName());
         redirectAttributes.addAttribute("team2Name", team2.getName());
         redirectAttributes.addAttribute("team1Description", team1.getDescription());
@@ -103,6 +99,10 @@ public class PokemonBattleService {
         }
         
         redirectAttributes.addAttribute("winner", winner);
+    }
+
+    public Team getBattleTeam(int teamId) {
+        return pokeTeamDao.getTeamById(teamId);
     }
 
 }

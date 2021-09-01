@@ -10,8 +10,10 @@ import com.jdm.pokeAPI.dao.PokemonTeamDao;
 import com.jdm.pokeAPI.entities.pokemon.PokemonDb;
 import com.jdm.pokeAPI.entities.team.Team;
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.RestTemplate;
 
 /**
  *
@@ -21,7 +23,10 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class PokemonTeamService {
-
+    
+    @Autowired
+    RestTemplate restTemplate;
+    
     @Autowired
     PokemonTeamDao teamDao;
     
@@ -29,7 +34,6 @@ public class PokemonTeamService {
         Team team = new Team();
         team.setName(teamName);
         team.setDescription(teamDescription);
-        team = teamDao.addTeam(team);
         return team;
     }
 
@@ -37,15 +41,25 @@ public class PokemonTeamService {
         return teamDao.getAllTeams();
     }
 
-    public void addPokemon(String pokemonName, String pokemonDescription, int teamId) {
+    public PokemonDb createPokemon(String pokemonName, String pokemonDescription) {
+        
         PokemonDb pokemon = new PokemonDb();
         pokemon.setName(pokemonName);
         pokemon.setNote(pokemonDescription);
+        
+        return pokemon;
+    }
+    
+    public void addPokemon(PokemonDb pokemon, int teamId){
         teamDao.addPokemonToTeam(pokemon, teamId);
     }
 
     public void deleteTeam(int teamId) {
         teamDao.deleteTeamById(teamId);
+    }
+
+    public void addTeam(Team team) {
+        teamDao.addTeam(team);    
     }
 
 }

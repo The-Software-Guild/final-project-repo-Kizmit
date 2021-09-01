@@ -28,6 +28,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 public class PokemonTeamBattleController {
     
+    
     @Autowired
     private PokemonBattleService pokeBattleService;
     
@@ -45,7 +46,10 @@ public class PokemonTeamBattleController {
     public String teamBattle(RedirectAttributes redirectAttributes,
                              @RequestParam("team1") int team1Id,
                              @RequestParam("team2") int team2Id){
-        pokeBattleService.setupBattleInfo(team1Id, team2Id, redirectAttributes);
+        Team team1 = pokeBattleService.getBattleTeam(team1Id);
+        Team team2 = pokeBattleService.getBattleTeam(team2Id);
+        
+        pokeBattleService.setupBattleInfo(team1, team2, redirectAttributes);
         return "redirect:/teamBattle";
     }
 

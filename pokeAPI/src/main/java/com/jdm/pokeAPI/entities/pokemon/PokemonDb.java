@@ -6,6 +6,8 @@
 
 package com.jdm.pokeAPI.entities.pokemon;
 
+import javax.validation.constraints.NotBlank;
+
 /**
  *
  * @author Joe McAdams
@@ -14,7 +16,11 @@ package com.jdm.pokeAPI.entities.pokemon;
  */
 public class PokemonDb {
     private int id;
-    private String name, note;
+    
+    @NotBlank(message = "Must enter a name for the pokemon")
+    private String name;
+    
+    private String note;
 
 
 

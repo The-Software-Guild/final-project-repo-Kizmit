@@ -19,7 +19,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
@@ -30,8 +29,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
  */
 @Controller
 public class PokemonInfoController {
-    @Autowired
-    private RestTemplate restTemplate;
     
     @Autowired
     private PokemonInfoService pokeInfoService;
@@ -44,7 +41,7 @@ public class PokemonInfoController {
     @PostMapping("searchPokemon")
     public String searchPokeInfo(RedirectAttributes redirectAttributes,
                                 @ModelAttribute("pokemonName") String name){
-        pokeInfoService.setupPokeInfo(restTemplate, name, redirectAttributes);
+        pokeInfoService.setupPokeInfo(name, redirectAttributes);
         return "redirect:/pokeInfo";
     }
     

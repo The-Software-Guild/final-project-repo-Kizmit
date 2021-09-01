@@ -6,13 +6,12 @@
 
 package com.jdm.pokeAPI.service;
 
-import com.jdm.pokeAPI.entities.moves.Move;
 import com.jdm.pokeAPI.entities.pokemon.Pokemon;
-import com.jdm.pokeAPI.entities.pokemon.PokemonMove;
 import com.jdm.pokeAPI.entities.pokemon.PokemonSpecies;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import static org.springframework.util.StringUtils.capitalize;
 import org.springframework.web.client.RestTemplate;
@@ -26,8 +25,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
  */
 @Component
 public class PokemonInfoService {
+    @Autowired
+    RestTemplate restTemplate;
+    
+    public void setupPokeInfo( String name, RedirectAttributes redirectAttributes) {
 
-    public void setupPokeInfo(RestTemplate restTemplate, String name, RedirectAttributes redirectAttributes) {
         Pokemon pokemon = restTemplate.getForObject("https://pokeapi.co/api/v2/pokemon/" + name.toLowerCase(), Pokemon.class);
         pokemon.setSpecies(restTemplate.getForObject("https://pokeapi.co/api/v2/pokemon-species/"+ name.toLowerCase(), PokemonSpecies.class));
         

@@ -8,6 +8,9 @@ package com.jdm.pokeAPI.entities.team;
 
 import com.jdm.pokeAPI.entities.pokemon.PokemonDb;
 import java.util.List;
+import javax.validation.constraints.NotBlank;
+
+import javax.validation.constraints.Size;
 
 /**
  *
@@ -17,7 +20,13 @@ import java.util.List;
  */
 public class Team {
     private int id;
-    private String name, description;
+    
+    @NotBlank(message = "Must enter a name")
+    private String name;
+
+    @Size(max = 50, message = "Description must be less than 50 characters")
+    private String description;
+    
     private List<PokemonDb> pokemon;
 
     public List<PokemonDb> getPokemon() {
