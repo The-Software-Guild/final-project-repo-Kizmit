@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.GetMapping;
  */
 @Controller
 public class PokemonHomeController {
+    
     @GetMapping("home")
     public String home(){
         return "home";

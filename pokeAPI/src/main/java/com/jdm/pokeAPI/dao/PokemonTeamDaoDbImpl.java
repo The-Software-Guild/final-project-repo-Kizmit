@@ -39,7 +39,7 @@ public class PokemonTeamDaoDbImpl implements PokemonTeamDao{
         
         return teams;
     }
-    
+    @Override
     public Team getTeamById(int teamId){
        final String GET_TEAM_BY_ID = "SELECT * FROM team WHERE teamId = ?";
        Team team = jdbc.queryForObject(GET_TEAM_BY_ID, new TeamMapper(), teamId);
@@ -92,6 +92,7 @@ public class PokemonTeamDaoDbImpl implements PokemonTeamDao{
         final String DELETE_TEAM = "DELETE t.* FROM team t WHERE teamId = ?";
         jdbc.update(DELETE_TEAM, teamId);
     }
+
 
     private static final class TeamMapper implements RowMapper<Team> {
 

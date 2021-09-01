@@ -23,5 +23,6 @@ public interface PokemonTeamDao {
     public void addPokemonToTeam(PokemonDb pokemon, int teamId);
 
     public void deleteTeamById(int teamId);
-    
+
+    public Team getTeamById(int teamId);
 }
