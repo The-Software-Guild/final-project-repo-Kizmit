@@ -6,7 +6,9 @@
 
 package com.jdm.pokeAPI.service;
 
+import com.jdm.pokeAPI.entities.moves.Move;
 import com.jdm.pokeAPI.entities.pokemon.Pokemon;
+import com.jdm.pokeAPI.entities.pokemon.PokemonMove;
 import com.jdm.pokeAPI.entities.pokemon.PokemonSpecies;
 
 import java.util.ArrayList;
@@ -33,6 +35,7 @@ public class PokemonInfoService {
         redirectAttributes.addAttribute("pokeSpriteBackMale", pokemon.getSprites().getBack_shiny());
         redirectAttributes.addAttribute("pokeSpriteBackFemale", pokemon.getSprites().getBack_shiny_female());
         redirectAttributes.addAttribute("pokeSpriteFrontFemale", pokemon.getSprites().getFront_shiny_female());
+        redirectAttributes.addAttribute("pokeGenus", capitalize(pokemon.getSpecies().getGenera().get(7).getGenus())); //English genus at index 7
         if(pokemon.getSpecies().getGender_rate() != -1){
             redirectAttributes.addAttribute("pokeGenderRatio", pokemon.getSpecies().getGender_rate() + "%");
         }
@@ -43,9 +46,14 @@ public class PokemonInfoService {
         redirectAttributes.addAttribute("pokeHabitat", capitalize(pokemon.getSpecies().getHabitat().getName()));
         redirectAttributes.addAttribute("pokeWeight", pokemon.getWeight() + " hg");
         redirectAttributes.addAttribute("pokeHeight", pokemon.getHeight() + " dm");
-        
+        List<String> stats = new ArrayList<>();
         List<String> types = new ArrayList<>();
         List<String> abilities = new ArrayList<>();
+        
+        pokemon.getStats().forEach(stat -> {
+            stats.add(capitalize(stat.getStat().getName() + ": " + stat.getBase_stat()));
+        });
+        
         pokemon.getTypes().forEach(type -> {
             types.add(capitalize(type.getType().getName()));
         });
@@ -53,7 +61,8 @@ public class PokemonInfoService {
         pokemon.getAbilities().forEach(ability -> {
             abilities.add(capitalize(ability.getAbility().getName()));
         });
-        redirectAttributes.addAttribute("pokeGenus", capitalize(pokemon.getSpecies().getGenera().get(7).getGenus()));
+        
+        redirectAttributes.addAttribute("pokeStats", stats);
         redirectAttributes.addAttribute("pokeAbilities", abilities);
         redirectAttributes.addAttribute("pokeTypes", types);
         

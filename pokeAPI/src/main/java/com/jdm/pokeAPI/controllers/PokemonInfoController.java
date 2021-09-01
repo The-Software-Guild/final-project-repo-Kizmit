@@ -9,11 +9,11 @@ package com.jdm.pokeAPI.controllers;
 
 
 
-import com.jdm.pokeAPI.entities.pokemon.PokemonAbility;
 import com.jdm.pokeAPI.service.PokemonInfoService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+
 
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,12 +29,13 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
  * 
  */
 @Controller
-public class PokemonController {
+public class PokemonInfoController {
     @Autowired
     private RestTemplate restTemplate;
     
     @Autowired
     private PokemonInfoService pokeInfoService;
+    
     @GetMapping("searchPokemon")
     public String findPokemon(){
         return "searchPokemon";
@@ -59,8 +60,10 @@ public class PokemonController {
                                @ModelAttribute("pokeHabitat") String habitat,
                                @ModelAttribute("pokeGenus") String genus,
                                @ModelAttribute("pokeWeight") String weight,
-                               @ModelAttribute("pokeHeight") String height){
-        
+                               @ModelAttribute("pokeHeight") String height,
+                               @ModelAttribute("pokeStats") List<String> stats
+                               ){
         return "pokeInfo";
     }
+
 }
