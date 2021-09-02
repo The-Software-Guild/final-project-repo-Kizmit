@@ -22,6 +22,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.client.RestTemplate;
 
 /**
  *
@@ -35,6 +36,9 @@ public class PokemonTeamController {
     
     Set<ConstraintViolation<Team>> teamViolations = new HashSet<>();
     Set<ConstraintViolation<PokemonDb>> pokeViolations = new HashSet<>();
+    
+    @Autowired
+    private RestTemplate restTemplate;
     
     @Autowired
     private PokemonTeamService pokeTeamService;
@@ -77,11 +81,13 @@ public class PokemonTeamController {
     public String addPokemon(@ModelAttribute("pokeName") String pokemonName,
                              @ModelAttribute("pokeDescription") String pokemonDescription,
                              @ModelAttribute("teamId") String teamId,
-                             Model model){ 
+                             Model model
+                             ){ 
         
         model.addAttribute("errors", pokeViolations);
+     
         PokemonDb pokemon = pokeTeamService.createPokemon(pokemonName, pokemonDescription);
-        
+
         Validator validate = Validation.buildDefaultValidatorFactory().getValidator();
         pokeViolations = validate.validate(pokemon);      
         

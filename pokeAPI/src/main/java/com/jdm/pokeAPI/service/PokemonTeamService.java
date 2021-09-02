@@ -7,6 +7,7 @@
 package com.jdm.pokeAPI.service;
 
 import com.jdm.pokeAPI.dao.PokemonTeamDao;
+import com.jdm.pokeAPI.entities.pokemon.Pokemon;
 import com.jdm.pokeAPI.entities.pokemon.PokemonDb;
 import com.jdm.pokeAPI.entities.team.Team;
 import java.util.List;
@@ -41,12 +42,11 @@ public class PokemonTeamService {
         return teamDao.getAllTeams();
     }
 
-    public PokemonDb createPokemon(String pokemonName, String pokemonDescription) {
-        
+    public PokemonDb createPokemon(String pokemonName, String pokemonDescription){
+
         PokemonDb pokemon = new PokemonDb();
         pokemon.setName(pokemonName);
         pokemon.setNote(pokemonDescription);
-        
         return pokemon;
     }
     

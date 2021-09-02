@@ -7,6 +7,7 @@
 package com.jdm.pokeAPI.entities.pokemon;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 
 /**
  *
@@ -18,6 +19,7 @@ public class PokemonDb {
     private int id;
     
     @NotBlank(message = "Must enter a name for the pokemon")
+    @Pattern(regexp = "^[a-zA-Z]+$", message = "Must enter a valid pokemon name")
     private String name;
     
     private String note;
